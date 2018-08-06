@@ -1,0 +1,11 @@
+#!/bin/bash
+
+psql -c "
+begin;
+insert into daily_stats(coin_id, date, average_euro, max_euro, min_euro, std_dev, median_euro) (select coin_id, time::date, avg(euro), max(euro), min(euro), stddev_pop(euro), median(euro) from prices where time::date = (current_date - 1) group by coin_id, time::date);
+insert into prices_archive(coin_id, time, euro, dollar) (select coin_id, time, euro, dollar from prices where time::date < (select max(time)::date-2 from prices));
+delete from prices where time::date < (select max(time)::date-2 from prices);
+commit;
+"
+psql -c "vacuum analyze;"
+psql -c "reindex table prices;"
