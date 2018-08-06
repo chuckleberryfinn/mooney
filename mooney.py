@@ -14,6 +14,8 @@ logging.basicConfig(format='%(asctime)-15s %(message)s', level=logging.INFO)
 class Mooney(irc.bot.SingleServerIRCBot):
     def __init__(self, server, channel, nick):
         irc.bot.SingleServerIRCBot.__init__(self, [(server, 6667)], nick, nick)
+        self.nick = nick
+        self.server = server
         self.channel = channel
 
     def on_nicknameinuse(self, c, _):
@@ -23,7 +25,7 @@ class Mooney(irc.bot.SingleServerIRCBot):
         c.join(self.channel)
 
     def on_ping(self, c, e):
-        c.ctcp_reply('mooney', "PING redbrick.dcu.ie")
+        c.ctcp_reply(self.nick, "PING %s" % self.server)
         self.send_alert(e)
 
     def send_alert(self, e):
