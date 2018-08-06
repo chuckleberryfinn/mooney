@@ -24,10 +24,6 @@ class Mooney(irc.bot.SingleServerIRCBot):
     def on_welcome(self, c, _):
         c.join(self.channel)
 
-    def on_ping(self, c, e):
-        c.ctcp_reply(self.nick, "PING %s" % self.server)
-        self.send_alert(e)
-
     def send_alert(self, e):
         alert = Alert(e)
         msg = alert.message()
