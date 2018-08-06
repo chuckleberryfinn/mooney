@@ -1,0 +1,2 @@
+# mooney
+Bitcoin IRC Bot
