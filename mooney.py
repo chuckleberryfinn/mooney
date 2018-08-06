@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import argparse
 import logging
+import threading
 import time
 
 import irc.bot
@@ -23,11 +24,13 @@ class Mooney(irc.bot.SingleServerIRCBot):
 
     def on_welcome(self, c, _):
         c.join(self.channel)
+        self.send_alert()
 
-    def send_alert(self, e):
-        alert = Alert(e)
+    def send_alert(self):
+        alert = Alert()
         msg = alert.message()
         self.send_privmsg(self.channel, msg)
+        threading.Timer(60 * 5, self.send_alert).start()
 
     def on_privmsg(self, c, e):
         logging.info('%s said: %s to me', e.source.nick, e.arguments[0])

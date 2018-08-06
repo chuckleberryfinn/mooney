@@ -109,6 +109,8 @@ class Control(Trigger):
 
 class Alert(Trigger):
     delay = timedelta(hours=1)
+    def __init__(self):
+        pass
 
     def message(self):
         alert_msg = responses.Alert().get_response('btc')
