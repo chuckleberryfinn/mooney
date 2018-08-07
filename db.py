@@ -149,6 +149,7 @@ class CoinsDatabase(object):
         return curr.fetchone()
 
     def get_movers(self, sort='desc'):
+        ordering = {'desc':'desc', 'asc':'asc'}
         curr = self.conn.cursor()
         curr.execute("""
                         with movers as (
@@ -160,8 +161,8 @@ class CoinsDatabase(object):
                         select name, ticker, first, last, (last-first)*100/first as diff
                         from movers
                         join coins using(coin_id)
-                        order by diff %s limit 3;
-                    """ % sort)
+                        order by diff {} limit 3;
+                    """.format(ordering.get(sort, 'desc')))
         return curr.fetchall()
 
     def gen_stats(self):
