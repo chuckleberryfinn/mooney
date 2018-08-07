@@ -56,6 +56,14 @@ class Auto(object):
         return replies.Auto().response(comment)
 
 
+class Targeted(object):
+    def __init__(self, sender):
+        self.sender = sender
+
+    def get_response(self, comment):
+        return replies.Targeted(self.sender).response(comment)
+
+
 class Admin(object):
     def __init__(self, sender):
         self.sender = sender

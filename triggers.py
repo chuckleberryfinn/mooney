@@ -23,7 +23,7 @@ class Trigger(object):
         for c in cls.__subclasses__():
             if msgs[0].lower() in c.triggers:
                 return c(e)
-        return Auto(e)
+        return Auto.make(e)
 
     def __init__(self, e):
         self.msgs = e.arguments[0].split()
@@ -130,19 +130,35 @@ class Alert(Trigger):
 class Auto(Trigger):
     delay = timedelta(minutes=2)
 
+    @classmethod
+    def make(cls, e):
+        try:
+            return Targeted(e)
+        except ValueError:
+            return Auto(e)
+
     def message(self):
         resp = responses.Auto().get_response(' '.join(self.msgs))
 
-        if not resp:
-            return
-
-        if 'nemo' in resp.lower() and self.sender != 'nemo':
-            return
-
-        if self.cool_down():
+        if not resp or self.cool_down():
             return
 
         return resp
+
+
+class Targeted(Auto):
+    def __init__(self, e):
+        super(Targeted, self).__init__(e)
+        self.response = responses.Targeted(self.sender).get_response(' '.join(self.msgs))
+
+        if not self.response:
+            raise ValueError
+
+    def message(self):
+        if self.cool_down():
+            return
+
+        return self.response
 
 
 class Stats(Trigger):

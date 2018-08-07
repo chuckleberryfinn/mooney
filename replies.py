@@ -18,6 +18,16 @@ class Auto(Reply):
         return c[0] if c else None
 
 
+class Targeted(Reply):
+    def __init__(self, sender):
+        super(Targeted, self).__init__()
+        self.sender = sender
+
+    def response(self, comment):
+        c = self.cdb.get_targeted_remark(self.sender, comment)
+        return c[0] if c else None
+
+
 class Admin(Reply):
     def response(self, user):
         c = self.cdb.is_admin(user)

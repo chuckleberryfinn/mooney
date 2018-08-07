@@ -196,6 +196,22 @@ class CoinsDatabase(object):
                      """, (comment,))
         return curr.fetchone()
 
+    def get_targeted_remark(self, sender, comment):
+        curr = self.conn.cursor()
+        curr.execute("""
+                        with all_remarks as (
+                            select remark from users_remarks_replies
+                            join users using(user_id)
+                            join replies using(reply_id)
+                            join remarks using(remark_id)
+                            where username = %s and %s ~ regex
+                        )
+                        select * from all_remarks
+                        offset floor(random() * (select count(*) from all_remarks))
+                        limit 1;
+                     """, (sender, comment))
+        return curr.fetchone()
+
     def is_admin(self, user):
         curr = self.conn.cursor()
         curr.execute("""
