@@ -33,7 +33,7 @@ class CoinsDatabase(object):
                             select * from prices
                             join coins using(coin_id)
                             where time >= (select max(time::date) from prices)
-                            and name = (%s)
+                            and name = (%(coin)s)
                             order by time asc
                         ),
                         min_max_prices as (
@@ -58,7 +58,7 @@ class CoinsDatabase(object):
                         ),
                         first_price as (
                             select name, euro from daily_prices
-                            where name=(%s)
+                            where name=(%(coin)s)
                             limit 1
                         )
                         select name, ticker, lp.euro, dollar, min, max,
@@ -67,7 +67,7 @@ class CoinsDatabase(object):
                         join min_max_prices using(name)
                         join first_price as fp using(name)
                         join median_prices using(name)
-                     """, (coin, coin))
+                     """, {'coin':coin})
         return curr.fetchone()
 
     def check_ats(self, coin):
@@ -77,15 +77,15 @@ class CoinsDatabase(object):
                             select min(euro) as lowest, max(euro) as ath
                             from prices
                             join coins using(coin_id)
-                            where name = (%s)
+                            where name = (%(coin)s)
                             union select min_euro as lowest, max_euro as ath
                             from daily_stats
                             join coins using(coin_id)
-                            where name = (%s)
+                            where name = (%(coin)s)
                         )
                         select min(lowest) as lowest, max(ath) as ath
                         from all_ats
-                     """, (coin, coin))
+                     """, {'coin':coin})
         return curr.fetchone()
 
     def dated_ats(self, coin):
