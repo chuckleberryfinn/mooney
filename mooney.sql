@@ -292,17 +292,17 @@ CREATE TABLE users (
 ALTER TABLE public.users OWNER TO nemo;
 
 --
--- Name: users_remarks_replies; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: users_replies_remarks; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
 --
 
-CREATE TABLE users_remarks_replies (
+CREATE TABLE users_replies_remarks (
     user_id integer NOT NULL,
-    remark_id integer NOT NULL,
-    reply_id integer NOT NULL
+    reply_id integer NOT NULL,
+    remark_id integer NOT NULL
 );
 
 
-ALTER TABLE public.users_remarks_replies OWNER TO nemo;
+ALTER TABLE public.users_replies_remarks OWNER TO nemo;
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
@@ -476,6 +476,14 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: users_replies_remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+--
+
+ALTER TABLE ONLY users_replies_remarks
+    ADD CONSTRAINT users_replies_remarks_pkey PRIMARY KEY (user_id, reply_id, remark_id);
+
+
+--
 -- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
 --
 
@@ -555,27 +563,27 @@ ALTER TABLE ONLY user_replies
 
 
 --
--- Name: users_remarks_replies_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: users_replies_remarks_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
 --
 
-ALTER TABLE ONLY users_remarks_replies
-    ADD CONSTRAINT users_remarks_replies_remark_id_fkey FOREIGN KEY (remark_id) REFERENCES remarks(remark_id);
-
-
---
--- Name: users_remarks_replies_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
---
-
-ALTER TABLE ONLY users_remarks_replies
-    ADD CONSTRAINT users_remarks_replies_reply_id_fkey FOREIGN KEY (reply_id) REFERENCES replies(reply_id);
+ALTER TABLE ONLY users_replies_remarks
+    ADD CONSTRAINT users_replies_remarks_remark_id_fkey FOREIGN KEY (remark_id) REFERENCES remarks(remark_id);
 
 
 --
--- Name: users_remarks_replies_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: users_replies_remarks_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
 --
 
-ALTER TABLE ONLY users_remarks_replies
-    ADD CONSTRAINT users_remarks_replies_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
+ALTER TABLE ONLY users_replies_remarks
+    ADD CONSTRAINT users_replies_remarks_reply_id_fkey FOREIGN KEY (reply_id) REFERENCES replies(reply_id);
+
+
+--
+-- Name: users_replies_remarks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+--
+
+ALTER TABLE ONLY users_replies_remarks
+    ADD CONSTRAINT users_replies_remarks_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --
