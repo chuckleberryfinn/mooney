@@ -95,11 +95,11 @@ class CoinsDatabase(object):
                             select min(euro) as lowest, max(euro) as ath
                             from prices
                             join coins using(coin_id)
-                            where name = (%s)
+                            where name = (%(coin)s)
                             union select min_euro as lowest, max_euro as ath
                             from daily_stats
                             join coins using(coin_id)
-                            where name = (%s)
+                            where name = (%(coin)s)
                         ),
                         extremes as (
                             select min(lowest) as minimum, max(ath) as ath
@@ -110,12 +110,12 @@ class CoinsDatabase(object):
                             from prices
                             join coins using(coin_id)
                             where euro=(select minimum from extremes)
-                            and name = (%s)
+                            and name = (%(coin)s)
                             union select date, min_euro as price
                             from daily_stats
                             join coins using(coin_id)
                             where min_euro=(select minimum from extremes)
-                            and name = (%s)
+                            and name = (%(coin)s)
                             limit 1
                         ),
                         highest as (
@@ -123,18 +123,18 @@ class CoinsDatabase(object):
                             from prices
                             join coins using(coin_id)
                             where euro=(select ath from extremes)
-                            and name = (%s)
+                            and name = (%(coin)s)
                             union select date, max_euro as price
                             from daily_stats
                             join coins using(coin_id)
                             where max_euro=(select ath from extremes)
-                            and name = (%s)
+                            and name = (%(coin)s)
                             limit 1
                         )
 
                         select date, price from lowest union select date, price from highest
                         order by price asc;
-                     """, (coin, coin, coin, coin, coin, coin))
+                     """, {'coin':coin})
         return curr.fetchall()
 
     def get_stats(self, coin, date):
