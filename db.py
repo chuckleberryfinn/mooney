@@ -200,7 +200,7 @@ class CoinsDatabase(object):
         curr = self.conn.cursor()
         curr.execute("""
                         with all_remarks as (
-                            select remark from users_remarks_replies
+                            select remark from users_replies_remarks
                             join users using(user_id)
                             join replies using(reply_id)
                             join remarks using(remark_id)
