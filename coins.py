@@ -14,14 +14,17 @@ class CoinBase(object):
         return Decimal('%.2f' % price)
 
     def format_diff(self, diff):
+        return '%s Today\x03' % self._format_diff(diff)
+
+    def _format_diff(self, diff):
         if not diff:
             return ''
 
         abs_diff = 0 if int(abs(diff)) < 50 else 1
 
         if diff < 0:
-            return '\x0305Down: {:,.2f}% Today\x03'.format(abs(diff))
-        return '\x0303Up: {:,.2f}% Today\x03'.format(diff)
+            return '\x0305Down: {:,.2f}%'.format(abs(diff))
+        return '\x0303Up: {:,.2f}%'.format(diff)
 
 
 class Coins(CoinBase):
@@ -127,6 +130,10 @@ class Diff(Coin):
         diff['Last'] = self.format_price(diff['Last'])
         diff['Diff'] = self.format_diff(diff['Diff'])
         return diff
+
+    def format_diff(self, diff):
+        return '%s To Date\x03' % self._format_diff(diff)
+
 
 
 if __name__ == '__main__':
