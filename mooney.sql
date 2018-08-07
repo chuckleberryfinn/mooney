@@ -292,6 +292,19 @@ CREATE TABLE users (
 ALTER TABLE public.users OWNER TO nemo;
 
 --
+-- Name: users_remarks_replies; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+--
+
+CREATE TABLE users_remarks_replies (
+    user_id integer NOT NULL,
+    remark_id integer NOT NULL,
+    reply_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_remarks_replies OWNER TO nemo;
+
+--
 -- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
 --
 
@@ -539,6 +552,30 @@ ALTER TABLE ONLY user_replies
 
 ALTER TABLE ONLY user_replies
     ADD CONSTRAINT user_replies_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+--
+-- Name: users_remarks_replies_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+--
+
+ALTER TABLE ONLY users_remarks_replies
+    ADD CONSTRAINT users_remarks_replies_remark_id_fkey FOREIGN KEY (remark_id) REFERENCES remarks(remark_id);
+
+
+--
+-- Name: users_remarks_replies_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+--
+
+ALTER TABLE ONLY users_remarks_replies
+    ADD CONSTRAINT users_remarks_replies_reply_id_fkey FOREIGN KEY (reply_id) REFERENCES replies(reply_id);
+
+
+--
+-- Name: users_remarks_replies_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+--
+
+ALTER TABLE ONLY users_remarks_replies
+    ADD CONSTRAINT users_remarks_replies_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 --
