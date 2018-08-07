@@ -165,6 +165,25 @@ class CoinsDatabase(object):
                     """.format(ordering.get(sort, 'desc')))
         return curr.fetchall()
 
+    def get_diff(self, coin, date):
+        curr = self.conn.cursor()
+        curr.execute("""
+                        with first as (
+                            select coin_id, date, average_euro as first
+                            from daily_stats
+                            join coins using(coin_id)
+                            where name = (%(coin)s)
+                            and date = (%(date)s)
+                        )
+                        select name, ticker, date, first, euro as last, (euro-first)*100/first as diff
+                        from first
+                        join prices using(coin_id)
+                        join coins using(coin_id)
+                        where name = (%(coin)s)
+                        order by time desc limit 1;
+                    """, {'coin':coin, 'date':date})
+        return curr.fetchone()
+
     def gen_stats(self):
         curr = self.conn.cursor()
         curr.execute("""

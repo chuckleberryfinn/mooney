@@ -99,11 +99,11 @@ class Fiat(object):
 
 class Diff(object):
     def __init__(self, coin, date):
-        self.coin = coins.Coin(coin)
+        self.coin = coins.Diff(coin)
         self.date = date
 
     def get_response(self):
-        return 'Diff'
+        return self.coin.diff(self.date)
 
 
 if __name__ == '__main__':

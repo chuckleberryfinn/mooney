@@ -113,5 +113,21 @@ class ATS(Coin):
             return 'Dropping like a stone! SELL SELL SELL: %s' % self.price()
 
 
+class Diff(Coin):
+    def diff(self, date):
+        return ('Diff for {Name} ({Nick}) from {Date} to today: First: €{First:,} Latest: €{Last:,} Diff: {Diff}'
+               ).format(**self._diff(date))
+
+    def _diff(self, date):
+        fields = ['Name', 'Nick', 'Date', 'First', 'Last', 'Diff']
+        diff = dict(zip(fields, self.cdb.get_diff(self.name, date)))
+        diff['Name'] = diff['Name'].title()
+        diff['Nick'] = diff['Nick'].upper()
+        diff['First'] = self.format_price(diff['First'])
+        diff['Last'] = self.format_price(diff['Last'])
+        diff['Diff'] = self.format_diff(diff['Diff'])
+        return diff
+
+
 if __name__ == '__main__':
     pass
