@@ -115,11 +115,11 @@ class ATS(Coin):
 
 class Diff(Coin):
     def diff(self, date):
-        return ('Diff for {Name} ({Nick}) from {Date} to today: First: €{First:,} Latest: €{Last:,} Diff: {Diff}'
+        return ('Diff for {Name} ({Nick}) from {Date} to {Latest}: First: €{First:,} Latest: €{Last:,} Diff: {Diff}'
                ).format(**self._diff(date))
 
     def _diff(self, date):
-        fields = ['Name', 'Nick', 'Date', 'First', 'Last', 'Diff']
+        fields = ['Name', 'Nick', 'Date', 'Latest', 'First', 'Last', 'Diff']
         diff = dict(zip(fields, self.cdb.get_diff(self.name, date)))
         diff['Name'] = diff['Name'].title()
         diff['Nick'] = diff['Nick'].upper()

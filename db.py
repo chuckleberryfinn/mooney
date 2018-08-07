@@ -175,7 +175,8 @@ class CoinsDatabase(object):
                             where name = (%(coin)s)
                             and date = (%(date)s)
                         )
-                        select name, ticker, date, first, euro as last, (euro-first)*100/first as diff
+                        select name, ticker, date, date_trunc('minute', time) as latest, first, euro as last,
+                        (euro-first)*100/first as diff
                         from first
                         join prices using(coin_id)
                         join coins using(coin_id)
