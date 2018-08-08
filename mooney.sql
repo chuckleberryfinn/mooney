@@ -26,7 +26,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- Name: _final_median(numeric[]); Type: FUNCTION; Schema: public; Owner: nemo
+-- Name: _final_median(numeric[]); Type: FUNCTION; Schema: public; Owner: mooney
 --
 
 CREATE FUNCTION _final_median(numeric[]) RETURNS numeric
@@ -43,10 +43,10 @@ CREATE FUNCTION _final_median(numeric[]) RETURNS numeric
 $_$;
 
 
-ALTER FUNCTION public._final_median(numeric[]) OWNER TO nemo;
+ALTER FUNCTION public._final_median(numeric[]) OWNER TO mooney;
 
 --
--- Name: median(numeric); Type: AGGREGATE; Schema: public; Owner: nemo
+-- Name: median(numeric); Type: AGGREGATE; Schema: public; Owner: mooney
 --
 
 CREATE AGGREGATE median(numeric) (
@@ -57,14 +57,14 @@ CREATE AGGREGATE median(numeric) (
 );
 
 
-ALTER AGGREGATE public.median(numeric) OWNER TO nemo;
+ALTER AGGREGATE public.median(numeric) OWNER TO mooney;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: advice; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: advice; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE advice (
@@ -73,10 +73,10 @@ CREATE TABLE advice (
 );
 
 
-ALTER TABLE public.advice OWNER TO nemo;
+ALTER TABLE public.advice OWNER TO mooney;
 
 --
--- Name: advice_advice_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
+-- Name: advice_advice_id_seq; Type: SEQUENCE; Schema: public; Owner: mooney
 --
 
 CREATE SEQUENCE advice_advice_id_seq
@@ -87,17 +87,17 @@ CREATE SEQUENCE advice_advice_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.advice_advice_id_seq OWNER TO nemo;
+ALTER TABLE public.advice_advice_id_seq OWNER TO mooney;
 
 --
--- Name: advice_advice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nemo
+-- Name: advice_advice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mooney
 --
 
 ALTER SEQUENCE advice_advice_id_seq OWNED BY advice.advice_id;
 
 
 --
--- Name: alerts; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: alerts; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE alerts (
@@ -107,10 +107,10 @@ CREATE TABLE alerts (
 );
 
 
-ALTER TABLE public.alerts OWNER TO nemo;
+ALTER TABLE public.alerts OWNER TO mooney;
 
 --
--- Name: coins; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: coins; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE coins (
@@ -120,10 +120,10 @@ CREATE TABLE coins (
 );
 
 
-ALTER TABLE public.coins OWNER TO nemo;
+ALTER TABLE public.coins OWNER TO mooney;
 
 --
--- Name: coins_coin_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
+-- Name: coins_coin_id_seq; Type: SEQUENCE; Schema: public; Owner: mooney
 --
 
 CREATE SEQUENCE coins_coin_id_seq
@@ -134,17 +134,17 @@ CREATE SEQUENCE coins_coin_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.coins_coin_id_seq OWNER TO nemo;
+ALTER TABLE public.coins_coin_id_seq OWNER TO mooney;
 
 --
--- Name: coins_coin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nemo
+-- Name: coins_coin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mooney
 --
 
 ALTER SEQUENCE coins_coin_id_seq OWNED BY coins.coin_id;
 
 
 --
--- Name: daily_stats; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: daily_stats; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE daily_stats (
@@ -158,10 +158,10 @@ CREATE TABLE daily_stats (
 );
 
 
-ALTER TABLE public.daily_stats OWNER TO nemo;
+ALTER TABLE public.daily_stats OWNER TO mooney;
 
 --
--- Name: prices; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: prices; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE prices (
@@ -172,10 +172,10 @@ CREATE TABLE prices (
 );
 
 
-ALTER TABLE public.prices OWNER TO nemo;
+ALTER TABLE public.prices OWNER TO mooney;
 
 --
--- Name: prices_archive; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: prices_archive; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE prices_archive (
@@ -186,10 +186,10 @@ CREATE TABLE prices_archive (
 );
 
 
-ALTER TABLE public.prices_archive OWNER TO nemo;
+ALTER TABLE public.prices_archive OWNER TO mooney;
 
 --
--- Name: remarks; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: remarks; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE remarks (
@@ -198,10 +198,10 @@ CREATE TABLE remarks (
 );
 
 
-ALTER TABLE public.remarks OWNER TO nemo;
+ALTER TABLE public.remarks OWNER TO mooney;
 
 --
--- Name: remarks_remark_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
+-- Name: remarks_remark_id_seq; Type: SEQUENCE; Schema: public; Owner: mooney
 --
 
 CREATE SEQUENCE remarks_remark_id_seq
@@ -212,17 +212,17 @@ CREATE SEQUENCE remarks_remark_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.remarks_remark_id_seq OWNER TO nemo;
+ALTER TABLE public.remarks_remark_id_seq OWNER TO mooney;
 
 --
--- Name: remarks_remark_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nemo
+-- Name: remarks_remark_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mooney
 --
 
 ALTER SEQUENCE remarks_remark_id_seq OWNED BY remarks.remark_id;
 
 
 --
--- Name: replies; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: replies; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE replies (
@@ -231,10 +231,10 @@ CREATE TABLE replies (
 );
 
 
-ALTER TABLE public.replies OWNER TO nemo;
+ALTER TABLE public.replies OWNER TO mooney;
 
 --
--- Name: replies_remarks; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: replies_remarks; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE replies_remarks (
@@ -243,10 +243,10 @@ CREATE TABLE replies_remarks (
 );
 
 
-ALTER TABLE public.replies_remarks OWNER TO nemo;
+ALTER TABLE public.replies_remarks OWNER TO mooney;
 
 --
--- Name: replies_reply_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
+-- Name: replies_reply_id_seq; Type: SEQUENCE; Schema: public; Owner: mooney
 --
 
 CREATE SEQUENCE replies_reply_id_seq
@@ -257,17 +257,17 @@ CREATE SEQUENCE replies_reply_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.replies_reply_id_seq OWNER TO nemo;
+ALTER TABLE public.replies_reply_id_seq OWNER TO mooney;
 
 --
--- Name: replies_reply_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nemo
+-- Name: replies_reply_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mooney
 --
 
 ALTER SEQUENCE replies_reply_id_seq OWNED BY replies.reply_id;
 
 
 --
--- Name: user_replies; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: user_replies; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE user_replies (
@@ -276,10 +276,10 @@ CREATE TABLE user_replies (
 );
 
 
-ALTER TABLE public.user_replies OWNER TO nemo;
+ALTER TABLE public.user_replies OWNER TO mooney;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -289,10 +289,10 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE public.users OWNER TO nemo;
+ALTER TABLE public.users OWNER TO mooney;
 
 --
--- Name: users_replies_remarks; Type: TABLE; Schema: public; Owner: nemo; Tablespace: 
+-- Name: users_replies_remarks; Type: TABLE; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE TABLE users_replies_remarks (
@@ -302,10 +302,10 @@ CREATE TABLE users_replies_remarks (
 );
 
 
-ALTER TABLE public.users_replies_remarks OWNER TO nemo;
+ALTER TABLE public.users_replies_remarks OWNER TO mooney;
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: nemo
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: mooney
 --
 
 CREATE SEQUENCE users_user_id_seq
@@ -316,17 +316,17 @@ CREATE SEQUENCE users_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_user_id_seq OWNER TO nemo;
+ALTER TABLE public.users_user_id_seq OWNER TO mooney;
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nemo
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mooney
 --
 
 ALTER SEQUENCE users_user_id_seq OWNED BY users.user_id;
 
 
 --
--- Name: weekly_stats; Type: VIEW; Schema: public; Owner: nemo
+-- Name: weekly_stats; Type: VIEW; Schema: public; Owner: mooney
 --
 
 CREATE VIEW weekly_stats AS
@@ -342,45 +342,45 @@ CREATE VIEW weekly_stats AS
   GROUP BY coins.name;
 
 
-ALTER TABLE public.weekly_stats OWNER TO nemo;
+ALTER TABLE public.weekly_stats OWNER TO mooney;
 
 --
--- Name: advice_id; Type: DEFAULT; Schema: public; Owner: nemo
+-- Name: advice_id; Type: DEFAULT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY advice ALTER COLUMN advice_id SET DEFAULT nextval('advice_advice_id_seq'::regclass);
 
 
 --
--- Name: coin_id; Type: DEFAULT; Schema: public; Owner: nemo
+-- Name: coin_id; Type: DEFAULT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY coins ALTER COLUMN coin_id SET DEFAULT nextval('coins_coin_id_seq'::regclass);
 
 
 --
--- Name: remark_id; Type: DEFAULT; Schema: public; Owner: nemo
+-- Name: remark_id; Type: DEFAULT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY remarks ALTER COLUMN remark_id SET DEFAULT nextval('remarks_remark_id_seq'::regclass);
 
 
 --
--- Name: reply_id; Type: DEFAULT; Schema: public; Owner: nemo
+-- Name: reply_id; Type: DEFAULT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY replies ALTER COLUMN reply_id SET DEFAULT nextval('replies_reply_id_seq'::regclass);
 
 
 --
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: nemo
+-- Name: user_id; Type: DEFAULT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY users ALTER COLUMN user_id SET DEFAULT nextval('users_user_id_seq'::regclass);
 
 
 --
--- Name: advice_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: advice_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY advice
@@ -388,7 +388,7 @@ ALTER TABLE ONLY advice
 
 
 --
--- Name: advice_response_key; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: advice_response_key; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY advice
@@ -396,7 +396,7 @@ ALTER TABLE ONLY advice
 
 
 --
--- Name: alerts_user_id_coin_id_euro_key; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: alerts_user_id_coin_id_euro_key; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY alerts
@@ -404,7 +404,7 @@ ALTER TABLE ONLY alerts
 
 
 --
--- Name: coins_name_key; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: coins_name_key; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY coins
@@ -412,7 +412,7 @@ ALTER TABLE ONLY coins
 
 
 --
--- Name: coins_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: coins_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY coins
@@ -420,7 +420,7 @@ ALTER TABLE ONLY coins
 
 
 --
--- Name: remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY remarks
@@ -428,7 +428,7 @@ ALTER TABLE ONLY remarks
 
 
 --
--- Name: replies_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: replies_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY replies
@@ -436,7 +436,7 @@ ALTER TABLE ONLY replies
 
 
 --
--- Name: replies_regex_key; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: replies_regex_key; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY replies
@@ -444,7 +444,7 @@ ALTER TABLE ONLY replies
 
 
 --
--- Name: replies_remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: replies_remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY replies_remarks
@@ -452,7 +452,7 @@ ALTER TABLE ONLY replies_remarks
 
 
 --
--- Name: unique_coin_date; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: unique_coin_date; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY daily_stats
@@ -460,7 +460,7 @@ ALTER TABLE ONLY daily_stats
 
 
 --
--- Name: user_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: user_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY user_replies
@@ -468,7 +468,7 @@ ALTER TABLE ONLY user_replies
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -476,7 +476,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: users_replies_remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: users_replies_remarks_pkey; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY users_replies_remarks
@@ -484,7 +484,7 @@ ALTER TABLE ONLY users_replies_remarks
 
 
 --
--- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: nemo; Tablespace: 
+-- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: mooney; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -492,14 +492,14 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: prices_time_idx; Type: INDEX; Schema: public; Owner: nemo; Tablespace: 
+-- Name: prices_time_idx; Type: INDEX; Schema: public; Owner: mooney; Tablespace: 
 --
 
 CREATE INDEX prices_time_idx ON prices USING btree ("time");
 
 
 --
--- Name: alerts_coin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: alerts_coin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY alerts
@@ -507,7 +507,7 @@ ALTER TABLE ONLY alerts
 
 
 --
--- Name: alerts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: alerts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY alerts
@@ -515,7 +515,7 @@ ALTER TABLE ONLY alerts
 
 
 --
--- Name: coin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: coin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY prices
@@ -523,7 +523,7 @@ ALTER TABLE ONLY prices
 
 
 --
--- Name: daily_stats_coin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: daily_stats_coin_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY daily_stats
@@ -531,7 +531,7 @@ ALTER TABLE ONLY daily_stats
 
 
 --
--- Name: replies_remarks_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: replies_remarks_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY replies_remarks
@@ -539,7 +539,7 @@ ALTER TABLE ONLY replies_remarks
 
 
 --
--- Name: replies_remarks_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: replies_remarks_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY replies_remarks
@@ -547,7 +547,7 @@ ALTER TABLE ONLY replies_remarks
 
 
 --
--- Name: user_replies_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: user_replies_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY user_replies
@@ -555,7 +555,7 @@ ALTER TABLE ONLY user_replies
 
 
 --
--- Name: user_replies_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: user_replies_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY user_replies
@@ -563,7 +563,7 @@ ALTER TABLE ONLY user_replies
 
 
 --
--- Name: users_replies_remarks_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: users_replies_remarks_remark_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY users_replies_remarks
@@ -571,7 +571,7 @@ ALTER TABLE ONLY users_replies_remarks
 
 
 --
--- Name: users_replies_remarks_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: users_replies_remarks_reply_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY users_replies_remarks
@@ -579,7 +579,7 @@ ALTER TABLE ONLY users_replies_remarks
 
 
 --
--- Name: users_replies_remarks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nemo
+-- Name: users_replies_remarks_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mooney
 --
 
 ALTER TABLE ONLY users_replies_remarks
