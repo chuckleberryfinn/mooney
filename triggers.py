@@ -16,6 +16,8 @@ class Trigger(object):
     triggers = set()
     last_msg = None
     delay = None
+    help_message = ('Commands: !advice !ats !bears !bulls !help !coin !diff !fiat !stats. ' +
+                    '!help [command] for more information on a specific command.')
 
     @classmethod
     def make(cls, e):
@@ -53,6 +55,7 @@ class Trigger(object):
 
 class Price(Trigger):
     triggers = set(['!coin', '!crack', '!price'])
+    help_message = '!coin [coin|ticker]: Get current price for a coin. Defaults to btc.'
 
     def __init__(self, e):
         super(Price, self).__init__(e)
@@ -64,6 +67,7 @@ class Price(Trigger):
 class Advice(Trigger):
     triggers = set(['!advice'])
     delay = timedelta(seconds=20)
+    help_message = '!advice: Some of mooney''s sage advice'
 
     def __init__(self, e):
         super(Advice, self).__init__(e)
@@ -73,6 +77,7 @@ class Advice(Trigger):
 class Ats(Trigger):
     triggers = set(['!ats', '!ath'])
     delay = timedelta(seconds=20)
+    help_message = '!ats [coin]: All time highs and lows (since 2017-12-12) for a coin. Defaults to bitcoin.'
 
     def __init__(self, e):
         super(Ats, self).__init__(e)
@@ -163,6 +168,8 @@ class Targeted(Auto):
 
 class Stats(Trigger):
     triggers = set(['!stats'])
+    help_message = ('!stats [coin|ticker] [date]: Get the statistics for a coin''s price over the course of a day. ' +
+                    'Defaults to btc and yesterday''s date.')
 
     def __init__(self, e):
         super(Stats, self).__init__(e)
@@ -193,6 +200,7 @@ class Stats(Trigger):
 
 class Bulls(Trigger):
     triggers = set(['!bulls'])
+    help_message = '!bulls: Get today''s big winners.'
 
     def __init__(self, e):
         super(Bulls, self).__init__(e)
@@ -201,6 +209,7 @@ class Bulls(Trigger):
 
 class Bears(Trigger):
     triggers = set(['!bears'])
+    help_message = '!bears: Get today''s big losers.'
 
     def __init__(self, e):
         super(Bears, self).__init__(e)
@@ -209,6 +218,8 @@ class Bears(Trigger):
 
 class Fiat(Trigger):
     triggers = set(['!fiat'])
+    help_message = ('!fiat [coin|ticker] [amount]: Get the current price in fiat for an amount of coins. ' +
+                    'Defaults to btc and 1 coin.')
 
     def __init__(self, e):
         super(Fiat, self).__init__(e)
@@ -236,6 +247,8 @@ class Fiat(Trigger):
 
 class Diff(Trigger):
     triggers = set(['!diff'])
+    help_message = ('!diff [coin|ticker] [date]: Get the difference in price between the start date and current price.'
+                    + ' Defaults to btc and yesterday''s date.')
 
     def __init__(self, e):
         super(Diff, self).__init__(e)
@@ -262,6 +275,25 @@ class Diff(Trigger):
             d = date.today() - timedelta(days=1)
 
         self.command = responses.Diff(coin, d)
+
+
+class Help(Trigger):
+    triggers = set(['!help', '!halp'])
+
+    def __init__(self, e):
+        super(Help, self).__init__(e)
+        self.response = self.help_message
+
+        if len(self.msgs) == 1:
+            return
+
+        for cls in Trigger.__subclasses__():
+            if '!%s' % self.msgs[1].lower() in cls.triggers:
+                self.response = cls.help_message
+                break
+
+    def message(self):
+        return self.response
 
 
 if __name__ == '__main__':
