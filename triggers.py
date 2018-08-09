@@ -32,6 +32,30 @@ class Trigger(object):
         self.sender_nick = e.source.nick.lower() if e.source else None
         self.sender = e.source.user.lower() if e.source else None
 
+    def parse_coin_date(self):
+        if len(self.msgs) == 1:
+            coin = 'btc'
+            d = date.today() - timedelta(days=1)
+        elif len(self.msgs) == 2:
+            try:
+                d = datetime.strptime(self.msgs[1], '%Y-%m-%d').date()
+            except ValueError:
+                coin = self.msgs[1]
+                d = date.today() - timedelta(days=1)
+            else:
+                coin = 'btc'
+        else:
+            coin = self.msgs[1]
+            try:
+                d = datetime.strptime(self.msgs[2], '%Y-%m-%d').date()
+            except ValueError:
+                d = date.today() - timedelta(days=1)
+
+        if d <= datetime.strptime('2017-12-12', '%Y-%m-%d').date() or d >= date.today():
+            d = date.today() - timedelta(days=1)
+
+        return coin, d
+
     @classmethod
     def cool_down(cls): 
         if not cls.delay:
@@ -174,28 +198,8 @@ class Stats(Trigger):
     def __init__(self, e):
         super(Stats, self).__init__(e)
 
-        if len(self.msgs) == 1:
-            coin = 'btc'
-            d = date.today() - timedelta(days=1)
-        elif len(self.msgs) == 2:
-            try:
-                d = datetime.strptime(self.msgs[1], '%Y-%m-%d').date()
-            except ValueError:
-                coin = self.msgs[1]
-                d = date.today() - timedelta(days=1)
-            else:
-                coin = 'btc'
-        else:
-            coin = self.msgs[1]
-            try:
-                d = datetime.strptime(self.msgs[2], '%Y-%m-%d').date()
-            except ValueError:
-                d = date.today() - timedelta(days=1)
-
-        if d <= datetime.strptime('2017-12-12', '%Y-%m-%d').date() or d >= date.today():
-            d = date.today() - timedelta(days=1)
-
-        self.command = responses.Stats(coin, d)
+        coin, target_date = self.parse_coin_date()
+        self.command = responses.Stats(coin, target_date)
 
 
 class Bulls(Trigger):
@@ -253,28 +257,8 @@ class Diff(Trigger):
     def __init__(self, e):
         super(Diff, self).__init__(e)
 
-        if len(self.msgs) == 1:
-            coin = 'btc'
-            d = date.today() - timedelta(days=1)
-        elif len(self.msgs) == 2:
-            try:
-                d = datetime.strptime(self.msgs[1], '%Y-%m-%d').date()
-            except ValueError:
-                coin = self.msgs[1]
-                d = date.today() - timedelta(days=1)
-            else:
-                coin = 'btc'
-        else:
-            coin = self.msgs[1]
-            try:
-                d = datetime.strptime(self.msgs[2], '%Y-%m-%d').date()
-            except ValueError:
-                d = date.today() - timedelta(days=1)
-
-        if d <= datetime.strptime('2017-12-12', '%Y-%m-%d').date() or d >= date.today():
-            d = date.today() - timedelta(days=1)
-
-        self.command = responses.Diff(coin, d)
+        coin, target_date = self.parse_coin_date()
+        self.command = responses.Diff(coin, target_date)
 
 
 class Help(Trigger):
