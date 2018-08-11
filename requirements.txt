@@ -8,7 +8,6 @@ jaraco.logging==1.5
 jaraco.stream==1.1.2
 jaraco.text==1.9.2
 more-itertools==4.0.1
-pkg-resources==0.0.0
 psycopg2==2.7.3.2
 pytz==2017.3
 six==1.11.0
