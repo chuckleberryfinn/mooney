@@ -227,24 +227,20 @@ class Fiat(Trigger):
 
     def __init__(self, e):
         super(Fiat, self).__init__(e)
+        amount = 1
+        coin = 'btc'
 
-        if len(self.msgs) == 1:
-            coin = 'btc'
-            amount = 1
-        elif len(self.msgs) == 2:
+        if len(self.msgs) == 2:
             try:
                 amount = Decimal(self.msgs[1])
             except decimal.InvalidOperation:
                 coin = self.msgs[1]
-                amount = 1
-            else:
-                coin = 'btc'
-        else:
+        elif len(self.msgs) > 2:
             coin = self.msgs[1]
             try:
                 amount = Decimal(self.msgs[2])
             except decimal.InvalidOperation:
-                amount = 1
+                pass
 
         self.command = responses.Fiat(coin, amount)
 
