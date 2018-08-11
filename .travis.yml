@@ -1,1 +1,9 @@
 language: python
+
+services: 
+  - postgresql
+
+before_script:
+  - psql -c 'create user mooney'
+  - psql -c 'create database mooney owner mooney'
+  - psql -U mooney -d mooney mooney.sql
