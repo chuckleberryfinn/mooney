@@ -3,7 +3,7 @@ import psycopg2
 
 class CoinsDatabase(object):
     def __init__(self): 
-        self.conn = psycopg2.connect("dbname='nemo'")
+        self.conn = psycopg2.connect("dbname='mooney'")
 
     def insert_coins(self, coins):
         curr = self.conn.cursor()
