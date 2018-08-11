@@ -33,7 +33,7 @@ class Trigger(object):
         self.sender = e.source.user.lower() if e.source else None
 
     def parse_coin_date(self):
-        coint = 'btc'
+        coin = 'btc'
         d = date.today() - timedelta(days=1)
 
         if len(self.msgs) == 2:
