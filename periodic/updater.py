@@ -6,7 +6,7 @@ import time
 from decimal import *
 from urllib.request import urlopen, Request
 
-from db import CoinsDatabase
+from mooney.db import CoinsDatabase
 
 
 logging.basicConfig(format='%(asctime)-15s %(message)s', level=logging.INFO)
