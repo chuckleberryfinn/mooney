@@ -5,6 +5,7 @@ IRC bot that tracks the current prices of Crypto coins.
 Allows for realtime querying of current crypto coin prices.
 
 Requirements:
-  * irc=16.1
-  * psycopg2=2.7.3.2
+  * Postgres DB
+  * Python 3
+  ** See requirements.txt for packages
   * API Key for WorldCoinIndex
