@@ -241,6 +241,13 @@ class CoinsDatabase(object):
                      """, (user,))
         return curr.fetchone()
 
+    def min_date(self):
+        curr = self.conn.cursor()
+        curr.execute("""
+                        select min(date) from daily_stats
+                     """)
+        return curr.fetchone()
+
 
 if __name__ == '__main__':
     pass

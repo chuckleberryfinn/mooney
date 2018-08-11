@@ -34,5 +34,11 @@ class Admin(Reply):
         return True if c else False
 
 
+class Date(Reply):
+    def response(self):
+        d = self.cdb.min_date()
+        return d[0]
+
+
 if __name__ == '__main__':
     pass

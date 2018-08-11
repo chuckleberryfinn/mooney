@@ -106,5 +106,10 @@ class Diff(object):
         return self.coin.diff(self.date)
 
 
+class MinDate(object):
+    def get_response(self):
+        return replies.Date().response()
+
+
 if __name__ == '__main__':
     pass

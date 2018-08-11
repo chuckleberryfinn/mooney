@@ -48,7 +48,7 @@ class Trigger(object):
             except ValueError:
                 pass
 
-        if d <= datetime.strptime('2017-12-12', '%Y-%m-%d').date() or d >= date.today():
+        if d <= responses.MinDate().get_response() or d >= date.today():
             d = date.today() - timedelta(days=1)
 
         return coin, d
@@ -98,7 +98,8 @@ class Advice(Trigger):
 class Ats(Trigger):
     triggers = set(['!ats', '!ath'])
     delay = timedelta(seconds=20)
-    help_message = '!ats [coin]: All time highs and lows (since 2017-12-12) for a coin. Defaults to bitcoin.'
+    help_message = ('!ats [coin]: All time highs and lows (since %s) for a coin. Defaults to bitcoin.'
+                    % responses.MinDate().get_response())
 
     def __init__(self, e):
         super(Ats, self).__init__(e)
