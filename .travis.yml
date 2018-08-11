@@ -1,4 +1,6 @@
 language: python
+python:
+  - "3.5"
 
 services: 
   - postgresql
@@ -8,3 +10,6 @@ before_script:
   - psql -c 'create database mooney owner mooney'
   - psql -U mooney -d mooney -f schema/mooney.sql
   - psql -U mooney -d mooney -f tests/populate.sql
+
+script:
+  - python -m tests.test_triggers
