@@ -6,5 +6,5 @@ services:
 before_script:
   - psql -c 'create user mooney'
   - psql -c 'create database mooney owner mooney'
-  - psql -U mooney -d mooney -f mooney.sql
+  - psql -U mooney -d mooney -f schema/mooney.sql
   - psql -U mooney -d mooney -f tests/populate.sql
