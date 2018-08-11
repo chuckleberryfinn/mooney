@@ -33,23 +33,20 @@ class Trigger(object):
         self.sender = e.source.user.lower() if e.source else None
 
     def parse_coin_date(self):
-        if len(self.msgs) == 1:
-            coin = 'btc'
-            d = date.today() - timedelta(days=1)
-        elif len(self.msgs) == 2:
+        coint = 'btc'
+        d = date.today() - timedelta(days=1)
+
+        if len(self.msgs) == 2:
             try:
                 d = datetime.strptime(self.msgs[1], '%Y-%m-%d').date()
             except ValueError:
                 coin = self.msgs[1]
-                d = date.today() - timedelta(days=1)
-            else:
-                coin = 'btc'
-        else:
+        elif len(self.msgs) > 2:
             coin = self.msgs[1]
             try:
                 d = datetime.strptime(self.msgs[2], '%Y-%m-%d').date()
             except ValueError:
-                d = date.today() - timedelta(days=1)
+                pass
 
         if d <= datetime.strptime('2017-12-12', '%Y-%m-%d').date() or d >= date.today():
             d = date.today() - timedelta(days=1)
