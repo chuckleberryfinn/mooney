@@ -6,3 +6,5 @@ mooney/__pycache__/
 pip-selfcheck.json
 schema_dumper
 share/
+*.pyc
+.gitattributes
