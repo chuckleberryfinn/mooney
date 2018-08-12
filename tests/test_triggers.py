@@ -24,6 +24,10 @@ class TestTriggers(unittest.TestCase):
         self.assertTrue(triggers.Trigger.make(TestMessage('!coin')).message().startswith(
                         'Current Price for Bitcoin (BTC):'))
 
+    def test_fiat(self):
+        self.assertEqual(triggers.Trigger.make(TestMessage('!fiat')).message(),
+                         '1 Bitcoin (BTC) is worth €5,452.41 at €5,452.41 per coin')
+
 
 if __name__ == '__main__':
     unittest.main()
