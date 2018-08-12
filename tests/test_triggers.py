@@ -28,6 +28,10 @@ class TestTriggers(unittest.TestCase):
         self.assertEqual(triggers.Trigger.make(TestMessage('!fiat')).message(),
                          '1 Bitcoin (BTC) is worth €5,452.41 at €5,452.41 per coin')
 
+    def test_help(self):
+        self.assertEqual(triggers.Trigger.make(TestMessage('!help')).message(),
+                         'Commands: !advice !ats !bears !bulls !help !coin !diff !fiat !stats. !help [command] for more information on a specific command.')
+
 
 if __name__ == '__main__':
     unittest.main()
