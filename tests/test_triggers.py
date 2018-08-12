@@ -25,12 +25,36 @@ class TestTriggers(unittest.TestCase):
                         'Current Price for Bitcoin (BTC):'))
 
     def test_fiat(self):
-        self.assertEqual(triggers.Trigger.make(TestMessage('!fiat')).message(),
-                         '1 Bitcoin (BTC) is worth €5,452.41 at €5,452.41 per coin')
+        self.assertTrue(triggers.Trigger.make(TestMessage('!fiat')).message().startswith(
+                         '1 Bitcoin (BTC) is worth'))
 
     def test_help(self):
         self.assertEqual(triggers.Trigger.make(TestMessage('!help')).message(),
                          'Commands: !advice !ats !bears !bulls !help !coin !diff !fiat !stats. !help [command] for more information on a specific command.')
+
+    def test_help_advice(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help advice')).message().startswith('!advice'))
+
+    def test_help_ats(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help ats')).message().startswith('!ats'))
+
+    def test_help_bears(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help bears')).message().startswith('!bears'))
+
+    def test_help_bulls(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help bulls')).message().startswith('!bulls'))
+
+    def test_help_coin(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help coin')).message().startswith('!coin'))
+
+    def test_help_diff(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help diff')).message().startswith('!diff'))
+
+    def test_help_fiat(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help fiat')).message().startswith('!fiat'))
+
+    def test_help_stats(self):
+        self.assertTrue(triggers.Trigger.make(TestMessage('!help stats')).message().startswith('!stats'))
 
 
 if __name__ == '__main__':
