@@ -17,6 +17,10 @@ class TestTriggers(unittest.TestCase):
         self.assertTrue(triggers.Trigger.make(self.create_event('!coin')).message().startswith(
                         'Current Price for Bitcoin (BTC):'))
 
+    def test_diff(self):
+        self.assertTrue(triggers.Trigger.make(self.create_event('!diff 2017-12-13')).message().startswith(
+                        'Diff for Bitcoin (BTC) from'))
+
     def test_fiat(self):
         self.assertTrue(triggers.Trigger.make(self.create_event('!fiat')).message().startswith(
                          '1 Bitcoin (BTC) is worth'))
