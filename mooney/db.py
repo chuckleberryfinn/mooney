@@ -154,7 +154,7 @@ class CoinsDatabase(object):
         curr.execute("""
                         with movers as (
                             select distinct coin_id, first_value(euro) over w as first, last_value(euro) over w as last
-                            from prices where time::date=current_date WINDOW w as (
+                            from prices where time::date=(select max(time)::date from prices) WINDOW w as (
                                 partition by coin_id order by time range between unbounded preceding and unbounded
                                 following) order by coin_id
                         )

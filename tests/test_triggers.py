@@ -13,6 +13,14 @@ class TestTriggers(unittest.TestCase):
         self.assertTrue(triggers.Trigger.make(self.create_event('!ats')).message().startswith(
                         'All Time'))
 
+    def test_bears(self):
+        self.assertTrue(triggers.Trigger.make(self.create_event('!bears')).message().startswith(
+                        'Bitcoin'))
+
+    def test_bulls(self):
+        self.assertTrue(triggers.Trigger.make(self.create_event('!bulls')).message().startswith(
+                        'Bitcoin'))
+
     def test_coin(self):
         self.assertTrue(triggers.Trigger.make(self.create_event('!coin')).message().startswith(
                         'Current Price for Bitcoin (BTC):'))
