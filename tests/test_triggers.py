@@ -17,6 +17,10 @@ class TestTriggers(unittest.TestCase):
         self.assertTrue(triggers.Trigger.make(self.create_event('!fiat')).message().startswith(
                          '1 Bitcoin (BTC) is worth'))
 
+    def test_stats(self):
+        self.assertTrue(triggers.Trigger.make(self.create_event('!stats 2017-12-25')).message().startswith(
+                         'Stats for Bitcoin'))
+
     def test_help(self):
         self.assertEqual(triggers.Trigger.make(self.create_event('!help')).message(),
                         ('Commands: !advice !ats !bears !bulls !help !coin !diff !fiat !stats. ' +
