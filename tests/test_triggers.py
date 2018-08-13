@@ -9,6 +9,10 @@ class TestTriggers(unittest.TestCase):
     def test_advice(self):
         self.assertEqual(triggers.Trigger.make(self.create_event('!advice')).message(), 'Don\'t date robots!')
 
+    def test_ats(self):
+        self.assertTrue(triggers.Trigger.make(self.create_event('!ats')).message().startswith(
+                        'All Time'))
+
     def test_coin(self):
         self.assertTrue(triggers.Trigger.make(self.create_event('!coin')).message().startswith(
                         'Current Price for Bitcoin (BTC):'))
